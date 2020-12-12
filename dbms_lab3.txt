@@ -1,0 +1,276 @@
+
+Setting environment for using XAMPP for Windows.
+अनन्तराज श्रेष्ठ@SHRESTHAANANTAR c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.1.36-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use dblab3;
+Database changed
+MariaDB [dblab3]> show tables;
++------------------+
+| Tables_in_dblab3 |
++------------------+
+| customer         |
+| emp              |
+| product          |
+| sells            |
++------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [dblab3]> insert into customer(1,"ars","it officer","com",35000,"bhimad");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1,"ars","it officer","com",35000,"bhimad")' at line 1
+MariaDB [dblab3]> insert into customervalues(1,"ars","it officer","com",35000,"bhimad");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1,"ars","it officer","com",35000,"bhimad")' at line 1
+MariaDB [dblab3]> insert into customer values(1,"ars","it officer","com",35000,"bhimad");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [dblab3]> insert into customer values(1,"ars","it officer","com",35000,"bhimad");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [dblab3]> dsec cutomer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dsec cutomer' at line 1
+MariaDB [dblab3]> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| cid     | int(11)     | NO   | PRI | NULL    |       |
+| cname   | varchar(50) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.35 sec)
+
+MariaDB [dblab3]> insert into emp values(1,"ars","it officer","com",35000,"bhimad");
+Query OK, 1 row affected (0.10 sec)
+
+MariaDB [dblab3]> insert into emp values(1,"hari","lec","c and e",50000,"pkr");
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [dblab3]> insert into emp values(2,"hari","lec","c and e",50000,"pkr");
+Query OK, 1 row affected (0.16 sec)
+
+MariaDB [dblab3]> insert into customer values(1,"pk","rangrung");
+Query OK, 1 row affected (0.10 sec)
+
+MariaDB [dblab3]> insert into customer values(2,"nms","tanahun");
+Query OK, 1 row affected (0.15 sec)
+
+MariaDB [dblab3]> insert into product values(1,"laptop",71000,"dell");
+Query OK, 1 row affected (0.10 sec)
+
+MariaDB [dblab3]> insert into product values(2,"printer",50000,"ibm");
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [dblab3]> insert into sells values(1,1,50);
+Query OK, 1 row affected (0.15 sec)
+
+MariaDB [dblab3]> insert into sells value(2,2,10);
+Query OK, 1 row affected (0.16 sec)
+
+MariaDB [dblab3]> select * from emp where sal >500;
++-------+-------+------------+----------+-------+---------+
+| empno | ename | job        | deptname | sal   | address |
++-------+-------+------------+----------+-------+---------+
+|     1 | ars   | it officer | com      | 35000 | bhimad  |
+|     2 | hari  | lec        | c and e  | 50000 | pkr     |
++-------+-------+------------+----------+-------+---------+
+2 rows in set (0.07 sec)
+
+MariaDB [dblab3]> select * from product where price>500;
++-----+---------+-------+-------+
+| pid | pname   | price | pdesc |
++-----+---------+-------+-------+
+|   1 | laptop  | 71000 | dell  |
+|   2 | printer | 50000 | ibm   |
++-----+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [dblab3]> select * from product where price>25000;
++-----+---------+-------+-------+
+| pid | pname   | price | pdesc |
++-----+---------+-------+-------+
+|   1 | laptop  | 71000 | dell  |
+|   2 | printer | 50000 | ibm   |
++-----+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [dblab3]> select * from customer where address like "pkr";
+Empty set (0.00 sec)
+
+MariaDB [dblab3]> select * from customer where address ="pkr";
+Empty set (0.00 sec)
+
+MariaDB [dblab3]> select * from cudtomer;
+ERROR 1146 (42S02): Table 'dblab3.cudtomer' doesn't exist
+MariaDB [dblab3]> select * from customer;
++-----+-------+----------+
+| cid | cname | address  |
++-----+-------+----------+
+|   1 | pk    | rangrung |
+|   2 | nms   | tanahun  |
++-----+-------+----------+
+2 rows in set (0.00 sec)
+
+MariaDB [dblab3]> select * from customer where address like "rangrung";
++-----+-------+----------+
+| cid | cname | address  |
++-----+-------+----------+
+|   1 | pk    | rangrung |
++-----+-------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select * from emp where job like "lec" and address like "pkr";
++-------+-------+------+----------+-------+---------+
+| empno | ename | job  | deptname | sal   | address |
++-------+-------+------+----------+-------+---------+
+|     2 | hari  | lec  | c and e  | 50000 | pkr     |
++-------+-------+------+----------+-------+---------+
+1 row in set (0.06 sec)
+
+MariaDB [dblab3]> select count(distinct ename) from emp;
++-----------------------+
+| count(distinct ename) |
++-----------------------+
+|                     2 |
++-----------------------+
+1 row in set (0.09 sec)
+
+MariaDB [dblab3]> select count(distinct job) from emp;
++---------------------+
+| count(distinct job) |
++---------------------+
+|                   2 |
++---------------------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> update emp set sal=sal*1.15 where dname="c and e" and job="lec";
+ERROR 1054 (42S22): Unknown column 'dname' in 'where clause'
+MariaDB [dblab3]> update emp set sal=sal*1.15 where deptname="c and e" and job="lec";
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dblab3]> select * from emp where sal>(select avg(sal) from emp));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [dblab3]> select * from emp where sal>(select avg(sal) from emp);
++-------+-------+------+----------+-------+---------+
+| empno | ename | job  | deptname | sal   | address |
++-------+-------+------+----------+-------+---------+
+|     2 | hari  | lec  | c and e  | 57500 | pkr     |
++-------+-------+------+----------+-------+---------+
+1 row in set (0.06 sec)
+
+MariaDB [dblab3]> select * from product where pid =(select pid from sells where cid=2);
++-----+---------+-------+-------+
+| pid | pname   | price | pdesc |
++-----+---------+-------+-------+
+|   2 | printer | 50000 | ibm   |
++-----+---------+-------+-------+
+1 row in set (0.06 sec)
+
+MariaDB [dblab3]> select * from customer whrere cid =(select cid from sells where pid=2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'cid =(select cid from sells where pid=2)' at line 1
+MariaDB [dblab3]> select * from customer where cid =(select cid from sells where pid=2);
++-----+-------+---------+
+| cid | cname | address |
++-----+-------+---------+
+|   2 | nms   | tanahun |
++-----+-------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select * from product where pid =(select pid from sells group by cid having max(quantity));
+ERROR 1242 (21000): Subquery returns more than 1 row
+MariaDB [dblab3]> select * from product where pid in(select pid from sells group by cid having max(quantity));
++-----+---------+-------+-------+
+| pid | pname   | price | pdesc |
++-----+---------+-------+-------+
+|   1 | laptop  | 71000 | dell  |
+|   2 | printer | 50000 | ibm   |
++-----+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [dblab3]> select * from product where pid in(select pid from sells group by cid having quantity> max(quantity));
+ERROR 1054 (42S22): Unknown column 'quantity' in 'having clause'
+MariaDB [dblab3]> select * from product where pid in(select pid from sells group by cid having quantity=max(quantity));
+ERROR 1054 (42S22): Unknown column 'quantity' in 'having clause'
+MariaDB [dblab3]> select * from product  where pid = (select pid from sells where quantity>20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [dblab3]> select * from product  where pid = (select pid from sells where quantity>20);
++-----+--------+-------+-------+
+| pid | pname  | price | pdesc |
++-----+--------+-------+-------+
+|   1 | laptop | 71000 | dell  |
++-----+--------+-------+-------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select * from product  where pid = (select pid from sells where quantity=max(quantity));
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [dblab3]> select * from product  where pid = (select pid from sells where quantity=max(quantity));
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [dblab3]> select * from product where pid in(select pid from sells where cid in (select cid from sells where quantity in (select max(quantity) from sells))); 
++-----+--------+-------+-------+
+| pid | pname  | price | pdesc |
++-----+--------+-------+-------+
+|   1 | laptop | 71000 | dell  |
++-----+--------+-------+-------+
+1 row in set (0.08 sec)
+
+MariaDB [dblab3]> select sum(sal) from emp where deptname ="com";
++----------+
+| sum(sal) |
++----------+
+|    35000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select sum(sal) from emp where deptname="com" group by deptname;
++----------+
+| sum(sal) |
++----------+
+|    35000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select * from emp where salary in (select max(sal) from emp));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [dblab3]> select * from emp where salary in (select max(sal) from emp);
+ERROR 1054 (42S22): Unknown column 'salary' in 'IN/ALL/ANY subquery'
+MariaDB [dblab3]> select * from emp where sal in (select max(sal) from emp);
++-------+-------+------+----------+-------+---------+
+| empno | ename | job  | deptname | sal   | address |
++-------+-------+------+----------+-------+---------+
+|     2 | hari  | lec  | c and e  | 57500 | pkr     |
++-------+-------+------+----------+-------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select count(distinct ename) from emp where sal in (select avg(sal) from emp);
++-----------------------+
+| count(distinct ename) |
++-----------------------+
+|                     0 |
++-----------------------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select count(distinct ename) from emp where sal < (select avg(sal) from emp);
++-----------------------+
+| count(distinct ename) |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+MariaDB [dblab3]> select * from emp where sal in (select min(sal) where deptname="com");
++-------+-------+------------+----------+-------+---------+
+| empno | ename | job        | deptname | sal   | address |
++-------+-------+------------+----------+-------+---------+
+|     1 | ars   | it officer | com      | 35000 | bhimad  |
++-------+-------+------------+----------+-------+---------+
+1 row in set (0.01 sec)
+
+MariaDB [dblab3]> update emp set deptname="cs",address="pokhara" where ename="hari";
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dblab3]>
